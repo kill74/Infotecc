@@ -1,0 +1,237 @@
+/* Reset and base styles */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: 'Arial', sans-serif;
+  background: #ffffff; /* White background */
+  color: #000000; /* Black text */
+  min-height: 100vh;
+  line-height: 1.6;
+}
+
+/* Navigation */
+header {
+  background: rgba(0, 0, 0, 0.9); /* Black with transparency */
+  backdrop-filter: blur(10px);
+  padding: 1rem 0;
+  position: sticky;
+  top: 0;
+  z-index: 1000;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+nav {
+  max-width: 1200px;
+  margin: 0 auto;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0 2rem;
+}
+
+.logo {
+  font-size: 1.8rem;
+  font-weight: bold;
+  color: #ffffff; /* White text */
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2);
+  transition: transform 0.3s ease;
+}
+
+.logo:hover {
+  transform: scale(1.05);
+}
+
+.nav-links {
+  display: flex;
+  list-style: none;
+  gap: 2rem;
+}
+
+.nav-links a {
+  color: #ffffff; /* White text */
+  text-decoration: none;
+  font-weight: 500;
+  padding: 0.5rem 1rem;
+  border-radius: 5px;
+  transition: all 0.3s ease;
+  position: relative;
+}
+
+.nav-links a::after {
+  content: '';
+  position: absolute;
+  width: 0;
+  height: 2px;
+  background: #ffffff; /* White underline */
+  bottom: 0;
+  left: 0;
+  transition: width 0.3s ease;
+}
+
+.nav-links a:hover::after {
+  width: 100%;
+}
+
+.nav-links a:hover {
+  color: #000000; /* Black text on hover */
+  background: #ffffff; /* White background on hover */
+}
+
+/* Login Form */
+.login {
+  min-height: calc(100vh - 140px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 2rem;
+}
+
+.container {
+  background: rgba(255, 255, 255, 0.95); /* White with transparency */
+  backdrop-filter: blur(10px);
+  padding: 2.5rem;
+  border-radius: 15px;
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+  width: 100%;
+  max-width: 400px;
+  transform: translateY(0);
+  animation: float 6s ease-in-out infinite;
+}
+
+@keyframes float {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-10px); }
+}
+
+h2 {
+  color: #000000; /* Black text */
+  text-align: center;
+  margin-bottom: 2rem;
+  font-size: 2rem;
+  font-weight: 600;
+}
+
+.form-group {
+  margin-bottom: 1.5rem;
+}
+
+label {
+  display: block;
+  color: #000000; /* Black text */
+  margin-bottom: 0.5rem;
+  font-weight: 500;
+}
+
+input {
+  width: 100%;
+  padding: 0.8rem;
+  border: 1px solid #000000; /* Black border */
+  border-radius: 5px;
+  background: rgba(255, 255, 255, 0.9); /* White with transparency */
+  color: #000000; /* Black text */
+  transition: all 0.3s ease;
+}
+
+input:focus {
+  outline: none;
+  border-color: #000000; /* Black border on focus */
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+}
+
+.btn {
+  width: 100%;
+  padding: 1rem;
+  background: #000000; /* Black background */
+  color: #ffffff; /* White text */
+  border: none;
+  border-radius: 5px;
+  font-size: 1rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.btn:hover {
+  background: #333333; /* Dark gray on hover */
+  transform: translateY(-2px);
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+p {
+  color: #000000; /* Black text */
+  text-align: center;
+  margin-top: 1rem;
+}
+
+p a {
+  color: #000000; /* Black text */
+  text-decoration: none;
+  font-weight: bold;
+  transition: color 0.3s ease;
+}
+
+p a:hover {
+  color: #555555; /* Gray on hover */
+  text-decoration: underline;
+}
+
+/* Footer */
+footer {
+  background: rgba(0, 0, 0, 0.9); /* Black with transparency */
+  padding: 1.5rem 0;
+  text-align: center;
+  color: #ffffff; /* White text */
+  margin-top: auto;
+}
+
+footer p {
+  color: #ffffff; /* White text */
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  .nav-links {
+    display: none;
+  }
+
+  .container {
+    margin: 1rem;
+    padding: 1.5rem;
+  }
+
+  h2 {
+    font-size: 1.5rem;
+  }
+}
+
+/* Messages */
+.error-message {
+  background-color: #ffebee; /* Light red background */
+  color: #c62828; /* Dark red text */
+  padding: 1rem;
+  border-radius: 5px;
+  margin-bottom: 1rem;
+  text-align: center;
+  border: 1px solid #c62828;
+  animation: fadeIn 0.5s ease-in-out;
+}
+
+.success-message {
+  background-color: #e8f5e9; /* Light green background */
+  color: #2e7d32; /* Dark green text */
+  padding: 1rem;
+  border-radius: 5px;
+  margin-bottom: 1rem;
+  text-align: center;
+  border: 1px solid #2e7d32;
+  animation: fadeIn 0.5s ease-in-out;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(-10px); }
+  to { opacity: 1; transform: translateY(0); }
+}
