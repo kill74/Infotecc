@@ -1,6 +1,6 @@
 <?php
 session_start();
-require_once 'db.php';
+require_once 'db_connection.php';
 
 if (isset($_SESSION['error'])) {
   echo "<div class='error-message'>{$_SESSION['error']}</div>";
@@ -20,14 +20,17 @@ if (isset($_SESSION['success'])) {
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Registo</title>
   <link rel="stylesheet" href="Register.css">
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
 </head>
 
 <body>
   <section class="register">
     <div class="container">
       <h2>Registo</h2>
-      <form action="Register.php" method="POST">
+      <form action="registerR.php" method="POST">
+        <div class="form-group">
+          <label for="nome">Nome:</label>
+          <input type="text" id="nome" name="nome" required>
+        </div>
         <div class="form-group">
           <label for="email">Email:</label>
           <input type="email" id="email" name="email" required>

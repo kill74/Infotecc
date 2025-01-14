@@ -1,6 +1,6 @@
 <?php
 session_start();
-require_once 'db.php';
+require_once 'db_connection.php';
 
 if (isset($_SESSION['error'])) {
   echo "<div class='error-message'>{$_SESSION['error']}</div>";
@@ -20,14 +20,13 @@ if (isset($_SESSION['success'])) {
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Login</title>
   <link rel="stylesheet" href="Login.css">
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
 </head>
 
 <body>
   <section class="login">
     <div class="container">
       <h2>Login</h2>
-      <form action="Login.php" method="POST">
+      <form action="login.php" method="POST">
         <div class="form-group">
           <label for="email">Email:</label>
           <input type="email" id="email" name="email" required>
