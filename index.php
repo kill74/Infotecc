@@ -1,5 +1,11 @@
+<?php
+session_start();
+require_once 'db_connection.php';
+?>
+
 <!DOCTYPE html>
 <html lang="pt-PT">
+
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -10,6 +16,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
 </head>
+
 <body>
   <header>
     <nav>
@@ -20,7 +27,11 @@
         <li><a href="#evento">Evento</a></li>
         <li><a href="#servicos">Atividades</a></li>
         <li><a href="#contacto">Contacto</a></li>
-         <li><a href="Login.php">Login</a></li>
+        <?php if (isset($_SESSION['user_id'])): ?>
+          <li><a href="logout.php">Logout</a></li>
+        <?php else: ?>
+          <li><a href="Login.php">Login</a></li>
+        <?php endif; ?>
       </ul>
       <div class="menu-toggle" id="mobile-menu">
         <span class="bar"></span>
@@ -104,82 +115,82 @@
   </section>
   <!-- Schedule Section -->
   <section id="schedule" class="schedule">
-  <div class="container animate__animated animate__fadeInUp">
-    <!-- Dia 14 -->
-    <h2 class="schedule-day">Dia 14</h2>
-    <div class="schedule-grid">
-      <div class="schedule-item">
-        <div class="schedule-time">09:30 - 11:15</div>
-        <h3 class="schedule-title">Início das palestras</h3>
-        <p class="schedule-speaker">Vice Trags (OutSystem) & Across Metals (BMC)</p>
+    <div class="container animate__animated animate__fadeInUp">
+      <!-- Dia 14 -->
+      <h2 class="schedule-day">Dia 14</h2>
+      <div class="schedule-grid">
+        <div class="schedule-item">
+          <div class="schedule-time">09:30 - 11:15</div>
+          <h3 class="schedule-title">Início das palestras</h3>
+          <p class="schedule-speaker">Vice Trags (OutSystem) & Across Metals (BMC)</p>
+        </div>
+        <div class="schedule-item">
+          <div class="schedule-time">11:15 - 11:45</div>
+          <h3 class="schedule-title">Pausa para café</h3>
+        </div>
+        <div class="schedule-item">
+          <div class="schedule-time">11:45 - 12:30</div>
+          <h3 class="schedule-title">Inteligência Artificial em Operações de Cibersegurança</h3>
+          <p class="schedule-speaker">Francisco Geopárdos (Áustria)</p>
+        </div>
+        <div class="schedule-item">
+          <div class="schedule-time">12:30 - 13:15</div>
+          <h3 class="schedule-title">Da Paixão à Profissionalidade: Percurso de Carreira em IA e Deepfakes</h3>
+          <p class="schedule-speaker">Professor Hugo Santos</p>
+        </div>
+        <div class="schedule-item">
+          <div class="schedule-time">13:15 - 14:30</div>
+          <h3 class="schedule-title">Almoço</h3>
+        </div>
+        <div class="schedule-item">
+          <div class="schedule-time">14:30 - 16:00</div>
+          <h3 class="schedule-title">Desbloquear o Amanhã: Explorar o Futuro do Desenvolvimento de Software com Low-Code e IA</h3>
+          <p class="schedule-speaker">OutSystems & Trags Power (Dock)</p>
+        </div>
+        <div class="schedule-item">
+          <div class="schedule-time">16:00 - 17:30</div>
+          <h3 class="schedule-title">Detecção de Deepfakes usando CMNs</h3>
+          <p class="schedule-speaker">Professor Hugo Santos</p>
+        </div>
       </div>
-      <div class="schedule-item">
-        <div class="schedule-time">11:15 - 11:45</div>
-        <h3 class="schedule-title">Pausa para café</h3>
-      </div>
-      <div class="schedule-item">
-        <div class="schedule-time">11:45 - 12:30</div>
-        <h3 class="schedule-title">Inteligência Artificial em Operações de Cibersegurança</h3>
-        <p class="schedule-speaker">Francisco Geopárdos (Áustria)</p>
-      </div>
-      <div class="schedule-item">
-        <div class="schedule-time">12:30 - 13:15</div>
-        <h3 class="schedule-title">Da Paixão à Profissionalidade: Percurso de Carreira em IA e Deepfakes</h3>
-        <p class="schedule-speaker">Professor Hugo Santos</p>
-      </div>
-      <div class="schedule-item">
-        <div class="schedule-time">13:15 - 14:30</div>
-        <h3 class="schedule-title">Almoço</h3>
-      </div>
-      <div class="schedule-item">
-        <div class="schedule-time">14:30 - 16:00</div>
-        <h3 class="schedule-title">Desbloquear o Amanhã: Explorar o Futuro do Desenvolvimento de Software com Low-Code e IA</h3>
-        <p class="schedule-speaker">OutSystems & Trags Power (Dock)</p>
-      </div>
-      <div class="schedule-item">
-        <div class="schedule-time">16:00 - 17:30</div>
-        <h3 class="schedule-title">Detecção de Deepfakes usando CMNs</h3>
-        <p class="schedule-speaker">Professor Hugo Santos</p>
+      <!-- Dia 15 -->
+      <h2 class="schedule-day">Dia 15</h2>
+      <div class="schedule-grid">
+        <div class="schedule-item">
+          <div class="schedule-time">10:00 - 19:45</div>
+          <h3 class="schedule-title">A Jornada dos Dados à Sabedoria</h3>
+          <p class="schedule-speaker">Fernando Jesus Christ (Data Solutions)</p>
+        </div>
+        <div class="schedule-item">
+          <div class="schedule-time">19:45 - 20:15</div>
+          <h3 class="schedule-title">Pausa para café</h3>
+        </div>
+        <div class="schedule-item">
+          <div class="schedule-time">20:15 - 21:00</div>
+          <h3 class="schedule-title">Mesa-redonda com ex-alunos</h3>
+          <p class="schedule-speaker">Aurélio, João e Mónica (ex-alunos da EST)</p>
+        </div>
+        <div class="schedule-item">
+          <div class="schedule-time">21:00 - 21:45</div>
+          <h3 class="schedule-title">Entrega dos prémios dos posters</h3>
+        </div>
+        <div class="schedule-item">
+          <div class="schedule-time">21:45 - 23:00</div>
+          <h3 class="schedule-title">Almoço</h3>
+        </div>
+        <div class="schedule-item">
+          <div class="schedule-time">14:30 - 16:00</div>
+          <h3 class="schedule-title">Retalhos da vida de um consultor de dados</h3>
+          <p class="schedule-speaker">Fernando Jesus Christ (Data Solutions)</p>
+        </div>
+        <div class="schedule-item">
+          <div class="schedule-time">10:00 - 17:30</div>
+          <h3 class="schedule-title">Segurança informática nos dias de hoje</h3>
+          <p class="schedule-speaker">Francisco Lourenço (FORMCH) & Mónica Bianco (FORMCH)</p>
+        </div>
       </div>
     </div>
-    <!-- Dia 15 -->
-    <h2 class="schedule-day">Dia 15</h2>
-    <div class="schedule-grid">
-      <div class="schedule-item">
-        <div class="schedule-time">10:00 - 19:45</div>
-        <h3 class="schedule-title">A Jornada dos Dados à Sabedoria</h3>
-        <p class="schedule-speaker">Fernando Jesus Christ (Data Solutions)</p>
-      </div>
-      <div class="schedule-item">
-        <div class="schedule-time">19:45 - 20:15</div>
-        <h3 class="schedule-title">Pausa para café</h3>
-      </div>
-      <div class="schedule-item">
-        <div class="schedule-time">20:15 - 21:00</div>
-        <h3 class="schedule-title">Mesa-redonda com ex-alunos</h3>
-        <p class="schedule-speaker">Aurélio, João e Mónica (ex-alunos da EST)</p>
-      </div>
-      <div class="schedule-item">
-        <div class="schedule-time">21:00 - 21:45</div>
-        <h3 class="schedule-title">Entrega dos prémios dos posters</h3>
-      </div>
-      <div class="schedule-item">
-        <div class="schedule-time">21:45 - 23:00</div>
-        <h3 class="schedule-title">Almoço</h3>
-      </div>
-      <div class="schedule-item">
-        <div class="schedule-time">14:30 - 16:00</div>
-        <h3 class="schedule-title">Retalhos da vida de um consultor de dados</h3>
-        <p class="schedule-speaker">Fernando Jesus Christ (Data Solutions)</p>
-      </div>
-      <div class="schedule-item">
-        <div class="schedule-time">10:00 - 17:30</div>
-        <h3 class="schedule-title">Segurança informática nos dias de hoje</h3>
-        <p class="schedule-speaker">Francisco Lourenço (FORMCH) & Mónica Bianco (FORMCH)</p>
-      </div>
-    </div>
-  </div>
-</section>
+  </section>
   <!-- Location Section -->
   <section id="localizacao" class="localizacao">
     <div class="container">
@@ -199,8 +210,7 @@
             height="450"
             style="border:0;"
             allowfullscreen=""
-            loading="lazy"
-          ></iframe>
+            loading="lazy"></iframe>
         </div>
       </div>
     </div>
@@ -254,4 +264,5 @@
   </footer>
   <script src="script.js"></script>
 </body>
+
 </html>
