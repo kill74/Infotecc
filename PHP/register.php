@@ -1,46 +1,55 @@
 <?php
 session_start();
-require_once 'db.php';
+require_once 'db_connection.php';  
 
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
-  $email = trim($_POST['email']);
+  // Sanitize inputs
+  $email = filter_var(trim($_POST['email']), FILTER_SANITIZE_EMAIL);
   $password = trim($_POST['password']);
 
-  if (empty($email) || empty($password)) {
-    $_SESSION['error'] = "Por favor, preencha todos os campos.";
-    header("Location: Register.php");
+  // Validate email format
+  if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
+    $_SESSION['error'] = "Por favor, insira um email válido.";
+    header("Location: login.php");  // Changed to lowercase for consistency
     exit();
   }
 
-  if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
-    $_SESSION['error'] = "Por favor, insira um email válido.";
-    header("Location: Register.php");
+  // Check for empty fields
+  if (empty($email) || empty($password)) {
+    $_SESSION['error'] = "Por favor, preencha todos os campos.";
+    header("Location: login.php");
     exit();
   }
 
   try {
-    $stmt = $pdo->prepare("SELECT id FROM utilizadores WHERE email = :email");
+    // Using the $conn variable from db_connection.php instead of $pdo
+    $stmt = $conn->prepare("SELECT id, senha FROM utilizadores WHERE email = :email");
     $stmt->execute(['email' => $email]);
-    if ($stmt->fetch()) {
-      $_SESSION['error'] = "Este email já está registado. Por favor, utilize outro email.";
-      header("Location: Register.php");
+    $user = $stmt->fetch(PDO::FETCH_ASSOC);
+
+    if ($user && password_verify($password, $user['senha'])) {
+      // Start a secure session
+      session_regenerate_id(true);
+
+      $_SESSION['user_id'] = $user['id'];
+      $_SESSION['success'] = "Login bem-sucedido!";
+
+      // Clear any existing error messages
+      unset($_SESSION['error']);
+
+      header("Location: index.php");
+      exit();
+    } else {
+      $_SESSION['error'] = "Credenciais inválidas. Verifique o seu email e senha.";
+      header("Location: login.php");
       exit();
     }
-
-    $hashed_password = password_hash($password, PASSWORD_BCRYPT);
-
-    $stmt = $pdo->prepare("INSERT INTO utilizadores (email, password) VALUES (:email, :password)");
-    $stmt->execute([
-      'email' => $email,
-      'password' => $hashed_password
-    ]);
-
-    $_SESSION['success'] = "Registo bem-sucedido! <a href='Login.php'>Faz login aqui</a>.";
-    header("Location: Login.php");
-    exit();
   } catch (PDOException $e) {
-    $_SESSION['error'] = "Erro ao tentar registar. Por favor, tente novamente.";
-    header("Location: Register.php");
+    // Log the error securely (don't expose error details to users)
+    error_log("Login error: " . $e->getMessage());
+
+    $_SESSION['error'] = "Erro ao tentar fazer login. Por favor, tente novamente.";
+    header("Location: login.php");
     exit();
   }
 }
